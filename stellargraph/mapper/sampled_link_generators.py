@@ -43,6 +43,7 @@ from ..data import (
     SampledHeterogeneousBreadthFirstWalk,
     UniformRandomWalk,
     UnsupervisedSampler,
+    UnsupervisedTemporalSampler,
     DirectedBreadthFirstNeighbours,
 )
 from ..core.utils import is_real_iterable
@@ -124,7 +125,7 @@ class BatchedLinkGenerator(Generator):
             expected_dst_type = self.head_node_types[1]
 
         # Pass sampler to on-demand link sequence generation
-        if isinstance(link_ids, UnsupervisedSampler):
+        if (isinstance(link_ids, UnsupervisedSampler)) | (isinstance(link_ids, UnsupervisedTemporalSampler)):
             return OnDemandLinkSequence(self.sample_features, self.batch_size, link_ids)
 
         # Otherwise pass iterable (check?) to standard LinkSequence
