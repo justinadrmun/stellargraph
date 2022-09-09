@@ -39,6 +39,7 @@ from tensorflow.keras import backend as K
 from functools import reduce
 from tensorflow.keras.utils import Sequence
 from ..data.unsupervised_sampler import UnsupervisedSampler
+from ..data.unsupervised_temporal_sampler import UnsupervisedTemporalSampler
 from ..core.utils import is_real_iterable
 from ..random import random_state
 from scipy import sparse
@@ -277,7 +278,7 @@ class OnDemandLinkSequence(Sequence):
                 )
             )
 
-        if not isinstance(walker, UnsupervisedSampler):
+        if not (isinstance(walker, UnsupervisedSampler)) | (isinstance(walker, UnsupervisedTemporalSampler)):
             raise TypeError(
                 "({}) UnsupervisedSampler is required.".format(type(self).__name__)
             )
