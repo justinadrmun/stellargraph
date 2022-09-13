@@ -197,7 +197,7 @@ class UnsupervisedTemporalSampler:
         )
 
         negative_samples = self.np_random.choice(
-            all_nodes, size=len(positive_pairs), p=sampling_distribution_norm
+            all_nodes, size=len(positive_pairs)*self.neg_sampling_length, p=sampling_distribution_norm
         )
 
         negative_pairs = np.column_stack((positive_pairs[:, 0], negative_samples))
